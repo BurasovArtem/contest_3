@@ -1,0 +1,325 @@
+@function str-replace($string, $search, $replace: "") {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+
+  @return $string;
+}
+
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
+  $src: null;
+
+  $extmods: (
+    eot: "?",
+    svg: "#" + str-replace($name, " ", "_")
+  );
+
+  $formats: (
+    otf: "opentype",
+    ttf: "truetype"
+  );
+
+  @each $ext in $exts {
+    $extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+    $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+    $src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+  }
+
+  @font-face {
+    font-family: quote($name);
+    font-weight: $weight;
+    font-style: $style;
+
+    font-display: block;
+    src: $src;
+  }
+}
+
+@include font-face('OpenSans', 'fonts/OpenSans-Regular', normal, normal, ttf);
+@include font-face('PTSans', 'fonts/PTSans-Regular', normal, normal, ttf);
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: PTSans;
+}
+
+.promo {
+  width: 100%;
+  height: auto;
+  background: url('../images/main-bg.png');
+  background-size: 100% 100%;
+  justify-content: center;
+  display: flex;
+  color: white;
+  header {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    div {
+      display: flex;
+
+      .logo {
+        height: 50px;
+      }
+      .header_menu {
+        list-style-type: none;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        li {
+          margin-left: 60px;
+          cursor: pointer;
+          position: relative;
+          .submenu {
+            list-style-type: none;
+            display: none;
+            position: absolute;
+            .item {
+              margin: 10px 0;
+              margin-left: 30px;
+              min-width: 100px;
+            }
+          }
+          &:hover {
+            color: #FFFF00;
+            .submenu {
+              display: block;
+              color: white;
+            }
+            svg {
+              path {
+                fill: #FFFF00;
+              }
+            }
+          }
+          &:active {
+            color: #FF0000;
+            .submenu {
+              display: block;
+            }
+            svg {
+              path {
+                fill: #FF0000;
+              }
+            }
+          }
+        }
+      }
+      .header_menu:first-child {
+        li {
+          margin: 0 15px;
+        }
+      }
+    }
+  }
+  .title {
+    font-weight: 300;
+    font-size: 48px;
+    font-family: OpenSans;
+    text-align: center;
+    white-space: pre-line;
+    margin: 84px 0;
+  }
+  .description {
+    font-size: 18px;
+    line-height: 23px;
+    text-align: center;
+    white-space: pre-line;
+    margin-bottom: 99px;
+  }
+}
+
+.container {
+  width: 1200px;
+  height: auto;
+  .sub_container {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+main {
+  width: 100%;
+  height: auto;
+  background-color: white;
+  justify-content: center;
+  display: flex;
+  .title {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 23px;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .subtitle {
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 21px;
+    margin-bottom: 30px;
+  }
+  .description {
+    margin-bottom: 25px;
+  }
+  .card_container {
+    padding: 32px 0;
+    display: flex;
+    flex-direction: row;
+    width: 1200px;
+    justify-content: space-around;
+    .item {
+      width: calc(340px - 35px);
+      height: 323px;
+      background-color: #FAFAFA;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0 35px;
+      * {
+        margin: 11px 0;
+      }
+      img {
+
+      }
+      .title_item {
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 23px;
+      }
+      .description_item {
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 18px;
+        height: 73px;
+      }
+      .more {
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 18px;
+        color: #1657AB;
+        text-decoration: none;
+        margin-top: 37px;
+      }
+      &:hover {
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      }
+    }
+  }
+  .product_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 57px;
+    .item {
+      width: 30%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 200px;
+      img {  }
+      .title_prod {
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 23px;
+        margin: 11px 0;
+      }
+      .description_prod {
+        text-align: center;
+      }
+    }
+  }
+  .all_products_button {
+    padding: 18px 50px;
+    border: 1px solid #85B657;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    max-width: 240px;
+    margin-top: 30px;
+    &:hover {
+      background-color: #85B657;
+      border-color: white;
+      color: white;
+    }
+  }
+  .logo_container {
+    width: 1200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 110px;
+    img {
+      margin: 17.5px;
+    }
+  }
+}
+
+footer {
+  width: 100%;
+  height: auto;
+  background-color: #19263F;
+  color: white;
+  justify-content: center;
+  display: flex;
+  .about {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    p {
+      &:hover {
+        color: #FFFF00;
+      }
+      &:active {
+        color: #FF0000;
+      }
+      margin: 12.5px;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 21px;
+      cursor: pointer;
+    }
+  }
+  .social {
+    display: flex;
+    justify-content: center;
+    .item {
+      margin: 15.5px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      &:hover {
+        svg {
+          path {
+            fill: #FFFF00;
+          }
+        }
+      }
+      &:active {
+       svg {
+          path {
+            fill: #FF0000;
+          }
+        }
+      }
+    }
+  }
+  .madeby {
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    margin: 12.5px;
+    margin-bottom: 54px;
+  }
+}
