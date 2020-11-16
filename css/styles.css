@@ -277,7 +277,7 @@ footer {
         height: 100%;
         justify-content: center; }
         #mobile #mobile_content .header_menu li {
-          margin: 40px; }
+          margin: 20px; }
           #mobile #mobile_content .header_menu li .submenu {
             position: relative;
             display: block; }
@@ -285,7 +285,7 @@ footer {
               margin: 10px 0;
               text-align: center; }
   .promo .description {
-    padding: 0 100px; } }
+    padding: 0 40px; } }
 
 @media (max-width: 1200px) {
   main .subtitle {
@@ -299,7 +299,8 @@ footer {
     width: 100%;
     flex-wrap: wrap; }
     main .card_container .item {
-      margin: 20px; }
+      margin: 20px;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); }
   main .product_container {
     width: 100%; }
     main .product_container .item {

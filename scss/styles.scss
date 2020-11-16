@@ -383,7 +383,7 @@ footer {
           height: 100%;
           justify-content: center;
           li {
-            margin: 40px;
+            margin: 20px;
             .submenu {
               position: relative;
               display: block;
@@ -398,7 +398,7 @@ footer {
     }
     .promo {
       .description {
-        padding: 0 100px;
+        padding: 0 40px;
       }
     }
     
@@ -421,6 +421,7 @@ footer {
         flex-wrap: wrap;
         .item {
           margin: 20px;
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         }
       }
       .product_container {
