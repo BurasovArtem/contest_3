@@ -1,4 +1,4 @@
-function test() {
+function changeMenu() {
 	let burger = document.getElementById('burger'),
 		menu = document.getElementById('mobile'),
 		mobile_content = document.getElementById('mobile_content');
