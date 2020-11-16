@@ -143,6 +143,9 @@
     flex-direction: column;
     align-items: center;
   }
+  .sub_container:last-child {
+    align-items: inherit;
+  }
 }
 
 main {
@@ -383,7 +386,7 @@ footer {
           height: 100%;
           justify-content: center;
           li {
-            margin: 20px;
+            margin: 2ч0px;
             .submenu {
               position: relative;
               display: block;
